@@ -28,9 +28,12 @@ class board:
 
 class circle_player:
     def __init__(self) -> None:
-        pass
-
-
+        self.circle = turtle.Turtle()
+    
+    def draw_circle(self):
+        self.circle.circle(40)
+    def __call__(self):
+        self.draw_circle()
 
 
 
@@ -38,3 +41,5 @@ class circle_player:
 
 test = board()
 test()
+dra = circle_player()
+dra()
