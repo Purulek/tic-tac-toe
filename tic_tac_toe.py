@@ -18,13 +18,13 @@ class board:
         pen.setposition(positon_x,posytion_y)
         pen.pendown()
         pen.color("black")
-        pen.forward(300)
+        pen.forward(350)
 
     def __call__(self):
-        self.draw_line(self.pen1,-150,-60)
-        self.draw_line(self.pen2,-150,60)
-        self.draw_line(self.pen3,-60,125)
-        self.draw_line(self.pen4,60,125)
+        self.draw_line(self.pen1,-160,-60)
+        self.draw_line(self.pen2,-160,60)
+        self.draw_line(self.pen3,-60,150)
+        self.draw_line(self.pen4,60,150)
 
 class circle_player:
     def __init__(self) -> None:
@@ -32,9 +32,32 @@ class circle_player:
     
     def draw_circle(self):
         self.circle.circle(40)
-    def __call__(self, xcor,ycor):
+
+    def where (self):
+        wich_row = turtle.textinput("row")
+        wich_colum = turtle.textinput("colum")
+        if wich_row == "mid":
+            y = -35
+            if wich_colum == "mid":
+                x = 0
+            elif wich_colum == "left":
+                x = -115
+            elif wich_colum == "right":
+                x = 115
+        elif wich_row == "down":
+            y = -150
+            if wich_colum == "mid":
+                x = 0
+            elif wich_colum == "left":
+                x = -115
+            elif wich_colum == "right":
+                x = 115
+        elif wich_row == "up":
+            y = 150
+
+    def __call__(self):
         self.circle.penup()
-        self.circle.setposition(xcor,ycor)
+        self.circle.setposition(0,-155)
         self.circle.pendown()
         self.draw_circle()
 
@@ -45,4 +68,4 @@ class circle_player:
 test = board()
 test()
 dra = circle_player()
-dra(0,-40)
+dra()
