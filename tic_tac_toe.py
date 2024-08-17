@@ -32,7 +32,10 @@ class circle_player:
     
     def draw_circle(self):
         self.circle.circle(40)
-    def __call__(self):
+    def __call__(self, xcor,ycor):
+        self.circle.penup()
+        self.circle.setposition(xcor,ycor)
+        self.circle.pendown()
         self.draw_circle()
 
 
@@ -42,4 +45,4 @@ class circle_player:
 test = board()
 test()
 dra = circle_player()
-dra()
+dra(0,-40)
