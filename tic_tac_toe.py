@@ -122,10 +122,19 @@ class cross_player:
 
 
 
+test = board()
+test()
+cra = cross_player()
+
+dra = circle_player()
 
 
 
-
+for i in range(9):
+    if i % 2 == 0:
+        cra()
+    else:
+        dra()
 
 
 
