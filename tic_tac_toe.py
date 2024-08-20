@@ -2,6 +2,10 @@ import turtle
 import random 
 import time
 
+circle_place ={}
+cross_place = {}
+
+
 
 class board:
     def __init__(self) -> None:
@@ -40,14 +44,19 @@ class circle_player:
             y = -35
             if wich_colum == "mid":
                 x = 0
+                circle_place["mid"] = "mid"
             elif wich_colum == "left":
                 x = -115
+                
+                circle_place["mid"] = "left"
             elif wich_colum == "right":
                 x = 115
+                circle_place["mid"] = "right"
         elif wich_row == "down":
             y = -155
             if wich_colum == "mid":
                 x = 0
+                circle_place["down"] = "mid"
             elif wich_colum == "left":
                 x = -115
             elif wich_colum == "right":
@@ -136,14 +145,3 @@ for i in range(9):
     else:
         dra()
 
-
-
-
-
-
-test = board()
-test()
-"""cra = cross_player()
-cra()"""
-dra = circle_player()
-dra()
