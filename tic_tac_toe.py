@@ -1,9 +1,15 @@
 import turtle 
 import random 
 import time
+from tkinter import messagebox
 
-circle_place ={}
-cross_place = {}
+
+circle_place ={"mid":[],
+               "up":[],
+               "down":[]}
+cross_place = {"mid":[],
+               "up":[],
+               "down":[]}
 
 
 
@@ -45,31 +51,49 @@ class circle_player:
             if wich_colum == "mid":
                 x = 0
                 circle_place["mid"] = "mid"
+
             elif wich_colum == "left":
                 x = -115
-                
                 circle_place["mid"] = "left"
+
             elif wich_colum == "right":
                 x = 115
                 circle_place["mid"] = "right"
+
+
         elif wich_row == "down":
             y = -155
             if wich_colum == "mid":
                 x = 0
                 circle_place["down"] = "mid"
+
             elif wich_colum == "left":
                 x = -115
+                circle_place["down"] = "left"
+
             elif wich_colum == "right":
                 x = 115
+                circle_place["down"] = "right"
+
+
         elif wich_row == "up":
             y = 80
+            
+
             if wich_colum == "mid":
                 x = 0
+                circle_place["up"] = "mid"
+
             elif wich_colum == "left":
                 x = -115
+                circle_place["up"] = "left"
+
             elif wich_colum == "right":
                 x = 115
+                circle_place["up"] = "right"
+
         return [x,y]
+    
     def __call__(self):
         self.circle.penup()
         position = self.where()
@@ -80,7 +104,12 @@ class circle_player:
 class cross_player:
     def __init__(self) -> None:
         self.cross = turtle.Turtle()
-    
+
+    def Chek_if_move_is_posible(self,row,colum):
+        if row in circle_place and colum in circle_place[row] or row in cross_place and colum in cross_place[row]:
+            messagebox.showinfo( "inforamtion","hex is alerady engaged")
+            return True
+
     def draw_cross(self):
         self.cross.setheading(-45)
         self.cross.forward(130)
@@ -89,43 +118,71 @@ class cross_player:
         self.cross.pendown()
         self.cross.setheading(45)
         self.cross.forward(130)
-        time.sleep(3)
-
 
     def where (self):
-        wich_row = turtle.textinput("Cross Player","row")
-        wich_colum = turtle.textinput("Cross Player","colum")
-        if wich_row == "mid":
+        self.wich_row = turtle.textinput("Cross Player","row")
+        self.wich_colum = turtle.textinput("Cross Player","colum")
+        self.Chek_if_move_is_posible(self.wich_row, self.wich_colum)
+        if self.Chek_if_move_is_posible(self.wich_row, self.wich_colum) == True:
+            return True
+        elif self.wich_row == "mid":
             y = 40
-            if wich_colum == "mid":
+            if self.wich_colum == "mid":
                 x = -45
-            elif wich_colum == "left":
+                cross_place ["mid"].append("mid")
+
+            elif self.wich_colum == "left":
                 x = -160
-            elif wich_colum == "right":
+                cross_place ["mid"].append("left")
+
+            elif self.wich_colum == "right":
                 x = 80
-        elif wich_row == "down":
+                cross_place ["mid"].append("right")
+
+
+        elif self.wich_row == "down":
             y = -80
-            if wich_colum == "mid":
+            if self.wich_colum == "mid":
                 x = -45
-            elif wich_colum == "left":
+                cross_place ["down"].append("mid")
+
+            elif self.wich_colum == "left":
                 x = - 160
-            elif wich_colum == "right":
+                cross_place ["down"].append("left")
+
+            elif self.wich_colum == "right":
                 x = 80
-        elif wich_row == "up":
+                cross_place ["down"].append( "right")
+
+
+        elif self.wich_row == "up":
             y = 155
-            if wich_colum == "mid":
+            if self.wich_colum == "mid":
                 x = -45
-            elif wich_colum == "left":
+                cross_place ["up"].append( "mid")
+
+            elif self.wich_colum == "left":
                 x = -160
-            elif wich_colum == "right":
+                cross_place ["up"].append("left")
+
+            elif self.wich_colum == "right":
                 x = 80
+                cross_place ["up"] .append("right")
+
+
         return [x,y]
     def __call__(self):
-        self.cross.penup()
-        position = self.where()
-        self.cross.setposition(position[0],position[1])
-        self.cross.pendown()
-        self.draw_cross()
+        i = 0
+        while i < 1:
+            self.cross.penup()
+            position = self.where()
+            if position == True:
+                pass
+            else:
+                self.cross.setposition(position[0],position[1])
+                self.cross.pendown()
+                self.draw_cross()
+                i += 1
 
 
 
@@ -138,10 +195,12 @@ cra = cross_player()
 dra = circle_player()
 
 
-
-for i in range(9):
+i = 0
+while i <9:
     if i % 2 == 0:
         cra()
     else:
         dra()
-
+    i += 1
+print (cross_place)
+print(circle_place)
