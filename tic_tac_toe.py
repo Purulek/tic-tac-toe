@@ -36,9 +36,21 @@ class board:
         self.draw_line(self.pen3,-60,150)
         self.draw_line(self.pen4,60,150)
 
+    def win_con(self):
+        for row in circle_place:
+            if len(circle_place[row]) == 3 :
+                messagebox.showinfo("circle player wins")
+
+
 class circle_player:
     def __init__(self) -> None:
         self.circle = turtle.Turtle()
+    
+    
+    def Chek_if_move_is_posible(self,row,colum):
+        if row in circle_place and colum in circle_place[row] or row in cross_place and colum in cross_place[row]:
+            messagebox.showinfo( "inforamtion","hex is alerady engaged")
+            return True
     
     def draw_circle(self):
         self.circle.circle(40)
@@ -46,34 +58,36 @@ class circle_player:
     def where (self):
         wich_row = turtle.textinput("Circle Player","row")
         wich_colum = turtle.textinput("Circle Player","colum")
-        if wich_row == "mid":
+        if self.Chek_if_move_is_posible(wich_row, wich_colum) == True:
+            return True
+        elif wich_row == "mid":
             y = -35
             if wich_colum == "mid":
                 x = 0
-                circle_place["mid"] = "mid"
+                circle_place["mid"].append("mid")
 
             elif wich_colum == "left":
                 x = -115
-                circle_place["mid"] = "left"
+                circle_place["mid"].append("left")
 
             elif wich_colum == "right":
                 x = 115
-                circle_place["mid"] = "right"
+                circle_place["mid"].append("right")
 
 
         elif wich_row == "down":
             y = -155
             if wich_colum == "mid":
                 x = 0
-                circle_place["down"] = "mid"
+                circle_place["down"].append("mid")
 
             elif wich_colum == "left":
                 x = -115
-                circle_place["down"] = "left"
+                circle_place["down"].append("left")
 
             elif wich_colum == "right":
                 x = 115
-                circle_place["down"] = "right"
+                circle_place["down"].append("right")
 
 
         elif wich_row == "up":
@@ -82,24 +96,31 @@ class circle_player:
 
             if wich_colum == "mid":
                 x = 0
-                circle_place["up"] = "mid"
+                circle_place["up"].append( "mid")
 
             elif wich_colum == "left":
                 x = -115
-                circle_place["up"] = "left"
+                circle_place["up"].append("left")
 
             elif wich_colum == "right":
                 x = 115
-                circle_place["up"] = "right"
+                circle_place["up"].append("right")
 
         return [x,y]
     
     def __call__(self):
-        self.circle.penup()
-        position = self.where()
-        self.circle.setposition(position[0],position[1])
-        self.circle.pendown()
-        self.draw_circle()
+        i = 0
+        while i < 1:
+            self.circle.penup()
+            position = self.where()
+            if position == True:
+                pass
+            else:
+                self.circle.setposition(position[0],position[1])
+                self.circle.pendown()
+                self.draw_circle()
+                i += 1
+
 
 class cross_player:
     def __init__(self) -> None:
@@ -122,7 +143,6 @@ class cross_player:
     def where (self):
         self.wich_row = turtle.textinput("Cross Player","row")
         self.wich_colum = turtle.textinput("Cross Player","colum")
-        self.Chek_if_move_is_posible(self.wich_row, self.wich_colum)
         if self.Chek_if_move_is_posible(self.wich_row, self.wich_colum) == True:
             return True
         elif self.wich_row == "mid":
