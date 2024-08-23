@@ -36,11 +36,11 @@ class board:
         self.draw_line(self.pen3,-60,150)
         self.draw_line(self.pen4,60,150)
 
-    def win_con(self):
-        for row in circle_place:
-            if len(circle_place[row]) == 3 :
-                messagebox.showinfo("circle player wins")
-
+    def win_con(self,wich_player):
+        for row in wich_player:
+            if len(wich_player[row]) == 3 :
+                messagebox.showinfo("congratuliations","circle player wins")
+                turtle.bye()
 
 class circle_player:
     def __init__(self) -> None:
@@ -222,5 +222,7 @@ while i <9:
     else:
         dra()
     i += 1
+    test.win_con(cross_place)
+    test.win_con(circle_place)
 print (cross_place)
 print(circle_place)
