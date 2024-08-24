@@ -37,10 +37,25 @@ class board:
         self.draw_line(self.pen4,60,150)
 
     def win_con(self,wich_player):
+        m = 0
+        l = 0
+        r = 0
         for row in wich_player:
+            print(wich_player[row])
+        
+            if "mid" in wich_player[row]:
+                    m =+ 1
+            elif "left" in wich_player[row]:
+                    l =+ 1
+            elif "right" in wich_player[row]:
+                    r =+ 1
+            print(m,l,r)
             if len(wich_player[row]) == 3 :
-                messagebox.showinfo("congratuliations","circle player wins")
+                messagebox.showinfo("congratuliations",wich_player)
                 turtle.bye()
+
+           
+            
 
 class circle_player:
     def __init__(self) -> None:
