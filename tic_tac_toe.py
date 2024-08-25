@@ -36,7 +36,7 @@ class board:
         self.draw_line(self.pen3,-60,150)
         self.draw_line(self.pen4,60,150)
 
-    def win_con(self,wich_player):
+    def win_con(self,wich_player,who_wins):
         m = 0
         l = 0
         r = 0
@@ -44,17 +44,24 @@ class board:
             print(wich_player[row])
         
             if "mid" in wich_player[row]:
-                    m =+ 1
+                    m += 1
             elif "left" in wich_player[row]:
-                    l =+ 1
+                    l += 1
             elif "right" in wich_player[row]:
-                    r =+ 1
+                    r += 1
             print(m,l,r)
             if len(wich_player[row]) == 3 :
-                messagebox.showinfo("congratuliations",wich_player)
+                messagebox.showinfo("congratuliations",who_wins)
                 turtle.bye()
-
-           
+            elif m == 3 or l == 3 or r ==3:
+                messagebox.showinfo("congratuliations",who_wins)
+                turtle.bye()
+            elif "left" in wich_player["up"]  and "mid" in wich_player["mid"] and  "right" in wich_player["down"]:
+                messagebox.showinfo("congratuliations",who_wins)
+                turtle.bye()
+            elif "right" in wich_player["up"]  and "mid" in wich_player["mid"] and  "left" in wich_player["down"]:
+                messagebox.showinfo("congratuliations",who_wins)
+                turtle.bye()
             
 
 class circle_player:
@@ -237,7 +244,7 @@ while i <9:
     else:
         dra()
     i += 1
-    test.win_con(cross_place)
-    test.win_con(circle_place)
+    test.win_con(cross_place,"cross")
+    test.win_con(circle_place,"circle")
 print (cross_place)
 print(circle_place)
