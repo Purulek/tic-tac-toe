@@ -41,7 +41,6 @@ class board:
         l = 0
         r = 0
         for row in wich_player:
-            print(wich_player[row])
         
             if "mid" in wich_player[row]:
                     m += 1
@@ -49,7 +48,7 @@ class board:
                     l += 1
             elif "right" in wich_player[row]:
                     r += 1
-            print(m,l,r)
+            
             if len(wich_player[row]) == 3 :
                 messagebox.showinfo("congratuliations",who_wins)
                 turtle.bye()
@@ -57,10 +56,10 @@ class board:
                 messagebox.showinfo("congratuliations",who_wins)
                 turtle.bye()
             elif "left" in wich_player["up"]  and "mid" in wich_player["mid"] and  "right" in wich_player["down"]:
-                messagebox.showinfo("congratuliations",who_wins)
+                messagebox.showinfo("congratuliations","wins:",who_wins)
                 turtle.bye()
             elif "right" in wich_player["up"]  and "mid" in wich_player["mid"] and  "left" in wich_player["down"]:
-                messagebox.showinfo("congratuliations",who_wins)
+                messagebox.showinfo("congratuliations","wins:",who_wins)
                 turtle.bye()
             
 
@@ -80,56 +79,62 @@ class circle_player:
     def where (self):
         wich_row = turtle.textinput("Circle Player","row")
         wich_colum = turtle.textinput("Circle Player","colum")
-        if self.Chek_if_move_is_posible(wich_row, wich_colum) == True:
+        try:
+            if self.Chek_if_move_is_posible(wich_row, wich_colum) == True:
+                return True
+        
+            elif wich_row == "mid":
+                y = -35
+                if wich_colum == "mid":
+                    x = 0
+                    circle_place["mid"].append("mid")
+
+                elif wich_colum == "left":
+                    x = -115
+                    circle_place["mid"].append("left")
+
+                elif wich_colum == "right":
+                    x = 115
+                    circle_place["mid"].append("right")
+
+
+            elif wich_row == "down":
+                y = -155
+                if wich_colum == "mid":
+                    x = 0
+                    circle_place["down"].append("mid")
+
+                elif wich_colum == "left":
+                    x = -115
+                    circle_place["down"].append("left")
+
+                elif wich_colum == "right":
+                    x = 115
+                    circle_place["down"].append("right")
+
+
+            elif wich_row == "up":
+                y = 80
+                
+
+                if wich_colum == "mid":
+                    x = 0
+                    circle_place["up"].append( "mid")
+
+                elif wich_colum == "left":
+                    x = -115
+                    circle_place["up"].append("left")
+
+                elif wich_colum == "right":
+                    x = 115
+                    circle_place["up"].append("right")
+            elif wich_colum == "exit" or wich_row == "exit":
+                turtle.bye()
+
+            return [x,y]
+        except:
+            messagebox.showinfo("Error in data", "wrong colum or row")
             return True
-        elif wich_row == "mid":
-            y = -35
-            if wich_colum == "mid":
-                x = 0
-                circle_place["mid"].append("mid")
-
-            elif wich_colum == "left":
-                x = -115
-                circle_place["mid"].append("left")
-
-            elif wich_colum == "right":
-                x = 115
-                circle_place["mid"].append("right")
-
-
-        elif wich_row == "down":
-            y = -155
-            if wich_colum == "mid":
-                x = 0
-                circle_place["down"].append("mid")
-
-            elif wich_colum == "left":
-                x = -115
-                circle_place["down"].append("left")
-
-            elif wich_colum == "right":
-                x = 115
-                circle_place["down"].append("right")
-
-
-        elif wich_row == "up":
-            y = 80
-            
-
-            if wich_colum == "mid":
-                x = 0
-                circle_place["up"].append( "mid")
-
-            elif wich_colum == "left":
-                x = -115
-                circle_place["up"].append("left")
-
-            elif wich_colum == "right":
-                x = 115
-                circle_place["up"].append("right")
-
-        return [x,y]
-    
     def __call__(self):
         i = 0
         while i < 1:
@@ -165,54 +170,59 @@ class cross_player:
     def where (self):
         self.wich_row = turtle.textinput("Cross Player","row")
         self.wich_colum = turtle.textinput("Cross Player","colum")
-        if self.Chek_if_move_is_posible(self.wich_row, self.wich_colum) == True:
+        try:
+            if self.Chek_if_move_is_posible(self.wich_row, self.wich_colum) == True:
+                return True
+            elif self.wich_row == "mid":
+                y = 40
+                if self.wich_colum == "mid":
+                    x = -45
+                    cross_place ["mid"].append("mid")
+
+                elif self.wich_colum == "left":
+                    x = -160
+                    cross_place ["mid"].append("left")
+
+                elif self.wich_colum == "right":
+                    x = 80
+                    cross_place ["mid"].append("right")
+
+
+            elif self.wich_row == "down":
+                y = -80
+                if self.wich_colum == "mid":
+                    x = -45
+                    cross_place ["down"].append("mid")
+
+                elif self.wich_colum == "left":
+                    x = - 160
+                    cross_place ["down"].append("left")
+
+                elif self.wich_colum == "right":
+                    x = 80
+                    cross_place ["down"].append( "right")
+
+
+            elif self.wich_row == "up":
+                y = 155
+                if self.wich_colum == "mid":
+                    x = -45
+                    cross_place ["up"].append( "mid")
+
+                elif self.wich_colum == "left":
+                    x = -160
+                    cross_place ["up"].append("left")
+
+                elif self.wich_colum == "right":
+                    x = 80
+                    cross_place ["up"] .append("right")
+            elif self.wich_colum == "exit" or self.wich_row == "exit":
+                turtle.bye()
+
+            return [x,y]
+        except:
+            messagebox.showinfo("Error in data", "wrong colum or row")
             return True
-        elif self.wich_row == "mid":
-            y = 40
-            if self.wich_colum == "mid":
-                x = -45
-                cross_place ["mid"].append("mid")
-
-            elif self.wich_colum == "left":
-                x = -160
-                cross_place ["mid"].append("left")
-
-            elif self.wich_colum == "right":
-                x = 80
-                cross_place ["mid"].append("right")
-
-
-        elif self.wich_row == "down":
-            y = -80
-            if self.wich_colum == "mid":
-                x = -45
-                cross_place ["down"].append("mid")
-
-            elif self.wich_colum == "left":
-                x = - 160
-                cross_place ["down"].append("left")
-
-            elif self.wich_colum == "right":
-                x = 80
-                cross_place ["down"].append( "right")
-
-
-        elif self.wich_row == "up":
-            y = 155
-            if self.wich_colum == "mid":
-                x = -45
-                cross_place ["up"].append( "mid")
-
-            elif self.wich_colum == "left":
-                x = -160
-                cross_place ["up"].append("left")
-
-            elif self.wich_colum == "right":
-                x = 80
-                cross_place ["up"] .append("right")
-
-
-        return [x,y]
     def __call__(self):
         i = 0
         while i < 1:
