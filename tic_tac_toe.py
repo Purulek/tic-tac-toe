@@ -254,5 +254,4 @@ while i <9:
     i += 1
     test.win_con(cross_place,"cross")
     test.win_con(circle_place,"circle")
-print (cross_place)
-print(circle_place)
+
